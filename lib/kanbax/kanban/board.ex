@@ -5,8 +5,8 @@ defmodule Kanbax.Kanban.Board do
   alias Kanbax.Kanban.Column
 
   schema "boards" do
-    field :description, :string
     field :title, :string
+    field :description, :string
 
     has_many :column, Column
 

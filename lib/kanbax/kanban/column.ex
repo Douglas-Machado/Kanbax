@@ -13,8 +13,8 @@ defmodule Kanbax.Kanban.Column do
   end
 
   @doc false
-  def changeset(column, attrs) do
-    column
+  def changeset(attrs) do
+    %__MODULE__{}
     |> cast(attrs, [:title])
     |> validate_required([:title])
   end

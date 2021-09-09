@@ -20,7 +20,7 @@
   <tbody id="columns">
     <%= for column <- @columns do %>
       <tr id="column-<%= column.id %>">
-        <td><%= column.name %></td>
+        <td><%= column.title %></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.column_show_path(@socket, :show, column) %></span>
