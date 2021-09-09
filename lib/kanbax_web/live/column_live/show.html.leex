@@ -1,0 +1,22 @@
+<h1>Show Column</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, KanbaxWeb.ColumnLive.FormComponent,
+    id: @column.id,
+    title: @page_title,
+    action: @live_action,
+    column: @column,
+    return_to: Routes.column_show_path(@socket, :show, @column) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @column.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.column_show_path(@socket, :edit, @column), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.column_index_path(@socket, :index) %></span>

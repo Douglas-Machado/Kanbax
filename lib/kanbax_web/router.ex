@@ -65,6 +65,27 @@ defmodule KanbaxWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    live "/boards", BoardLive.Index, :index
+    live "/boards/new", BoardLive.Index, :new
+    live "/boards/:id/edit", BoardLive.Index, :edit
+
+    live "/boards/:id", BoardLive.Show, :show
+    live "/boards/:id/show/edit", BoardLive.Show, :edit
+
+    live "/columns", ColumnLive.Index, :index
+    live "/columns/new", ColumnLive.Index, :new
+    live "/columns/:id/edit", ColumnLive.Index, :edit
+
+    live "/columns/:id", ColumnLive.Show, :show
+    live "/columns/:id/show/edit", ColumnLive.Show, :edit
+
+    live "/tasks", TaskLive.Index, :index
+    live "/tasks/new", TaskLive.Index, :new
+    live "/tasks/:id/edit", TaskLive.Index, :edit
+
+    live "/tasks/:id", TaskLive.Show, :show
+    live "/tasks/:id/show/edit", TaskLive.Show, :edit
   end
 
   scope "/", KanbaxWeb do
