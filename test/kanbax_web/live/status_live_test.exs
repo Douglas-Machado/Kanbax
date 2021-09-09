@@ -22,10 +22,10 @@ defmodule KanbaxWeb.StatusLiveTest do
   describe "Index" do
     setup [:create_status]
 
-    test "lists all state", %{conn: conn, status: status} do
+    test "lists all status", %{conn: conn, status: status} do
       {:ok, _index_live, html} = live(conn, Routes.status_index_path(conn, :index))
 
-      assert html =~ "Listing State"
+      assert html =~ "Listing Status"
       assert html =~ status.title
     end
 

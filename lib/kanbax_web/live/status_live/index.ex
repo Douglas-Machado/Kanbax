@@ -6,7 +6,7 @@ defmodule KanbaxWeb.StatusLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :state, list_state())}
+    {:ok, assign(socket, :status_collection, list_status())}
   end
 
   @impl true
@@ -28,7 +28,7 @@ defmodule KanbaxWeb.StatusLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing State")
+    |> assign(:page_title, "Listing Status")
     |> assign(:status, nil)
   end
 
@@ -37,10 +37,10 @@ defmodule KanbaxWeb.StatusLive.Index do
     status = Kanban.get_status!(id)
     {:ok, _} = Kanban.delete_status(status)
 
-    {:noreply, assign(socket, :state, list_state())}
+    {:noreply, assign(socket, :status_collection, list_status())}
   end
 
-  defp list_state do
-    Kanban.list_state()
+  defp list_status do
+    Kanban.list_status()
   end
 end

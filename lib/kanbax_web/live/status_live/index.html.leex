@@ -1,4 +1,4 @@
-<h1>Listing State</h1>
+<h1>Listing Status</h1>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, KanbaxWeb.StatusLive.FormComponent,
@@ -17,8 +17,8 @@
       <th></th>
     </tr>
   </thead>
-  <tbody id="state">
-    <%= for status <- @state do %>
+  <tbody id="status">
+    <%= for status <- @status_collection do %>
       <tr id="status-<%= status.id %>">
         <td><%= status.title %></td>
 

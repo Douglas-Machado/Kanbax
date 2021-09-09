@@ -106,15 +106,15 @@ defmodule Kanbax.Kanban do
   alias Kanbax.Kanban.Status
 
   @doc """
-  Returns the list of state.
+  Returns the list of status.
 
   ## Examples
 
-      iex> list_state()
+      iex> list_status()
       [%Status{}, ...]
 
   """
-  def list_state do
+  def list_status do
     Repo.all(Status)
   end
 

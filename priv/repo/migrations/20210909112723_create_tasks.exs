@@ -5,7 +5,7 @@ defmodule Kanbax.Repo.Migrations.CreateTasks do
     create table(:tasks) do
       add :title, :string
       add :description, :string
-      add :state_id, references(:state)
+      add :status_id, references(:status)
 
       timestamps()
     end

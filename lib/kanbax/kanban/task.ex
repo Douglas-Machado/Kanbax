@@ -8,7 +8,7 @@ defmodule Kanbax.Kanban.Task do
     field :title, :string
     field :description, :string
 
-    belongs_to :state, Status
+    belongs_to :status, Status
 
     timestamps()
   end

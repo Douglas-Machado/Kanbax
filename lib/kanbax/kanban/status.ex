@@ -4,11 +4,10 @@ defmodule Kanbax.Kanban.Status do
 
   alias Kanbax.Kanban.Task
 
-  schema "state" do
+  schema "status" do
     field :title, :string
 
     has_many :tasks, Task
-
     timestamps()
   end
 

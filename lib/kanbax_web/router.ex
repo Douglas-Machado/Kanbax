@@ -66,12 +66,14 @@ defmodule KanbaxWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    live "/state", StatusLive.Index, :index
-    live "/state/new", StatusLive.Index, :new
-    live "/state/:id/edit", StatusLive.Index, :edit
+    live "/status", StatusLive.Index, :index
+    live "/status/new", StatusLive.Index, :new
+    live "/status/:id/edit", StatusLive.Index, :edit
 
-    live "/state/:id", StatusLive.Show, :show
-    live "/state/:id/show/edit", StatusLive.Show, :edit
+    live "/status/:id", StatusLive.Show, :show
+    live "/status/:id/show/edit", StatusLive.Show, :edit
+
+
 
 
     live "/tasks", TaskLive.Index, :index

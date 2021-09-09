@@ -238,4 +238,63 @@ defmodule Kanbax.KanbanTest do
       assert %Ecto.Changeset{} = Kanban.change_status(status)
     end
   end
+
+  describe "status" do
+    alias Kanbax.Kanban.Status
+
+    @valid_attrs %{title: "some title"}
+    @update_attrs %{title: "some updated title"}
+    @invalid_attrs %{title: nil}
+
+    def status_fixture(attrs \\ %{}) do
+      {:ok, status} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Kanban.create_status()
+
+      status
+    end
+
+    test "list_status/0 returns all status" do
+      status = status_fixture()
+      assert Kanban.list_status() == [status]
+    end
+
+    test "get_status!/1 returns the status with given id" do
+      status = status_fixture()
+      assert Kanban.get_status!(status.id) == status
+    end
+
+    test "create_status/1 with valid data creates a status" do
+      assert {:ok, %Status{} = status} = Kanban.create_status(@valid_attrs)
+      assert status.title == "some title"
+    end
+
+    test "create_status/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Kanban.create_status(@invalid_attrs)
+    end
+
+    test "update_status/2 with valid data updates the status" do
+      status = status_fixture()
+      assert {:ok, %Status{} = status} = Kanban.update_status(status, @update_attrs)
+      assert status.title == "some updated title"
+    end
+
+    test "update_status/2 with invalid data returns error changeset" do
+      status = status_fixture()
+      assert {:error, %Ecto.Changeset{}} = Kanban.update_status(status, @invalid_attrs)
+      assert status == Kanban.get_status!(status.id)
+    end
+
+    test "delete_status/1 deletes the status" do
+      status = status_fixture()
+      assert {:ok, %Status{}} = Kanban.delete_status(status)
+      assert_raise Ecto.NoResultsError, fn -> Kanban.get_status!(status.id) end
+    end
+
+    test "change_status/1 returns a status changeset" do
+      status = status_fixture()
+      assert %Ecto.Changeset{} = Kanban.change_status(status)
+    end
+  end
 end
