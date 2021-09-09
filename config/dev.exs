@@ -4,8 +4,8 @@ use Mix.Config
 config :kanbax, Kanbax.Repo,
   username: "postgres",
   password: "postgres",
-  database: "desafio2",
-  hostname: "db",
+  database: "desafio2_dev",
+  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
