@@ -1,4 +1,4 @@
-defmodule KanbaxWeb.BoardLive.Show do
+defmodule KanbaxWeb.StatusLive.Show do
   use KanbaxWeb, :live_view
 
   alias Kanbax.Kanban
@@ -13,9 +13,9 @@ defmodule KanbaxWeb.BoardLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:board, Kanban.get_board!(id))}
+     |> assign(:status, Kanban.get_status!(id))}
   end
 
-  defp page_title(:show), do: "Show Board"
-  defp page_title(:edit), do: "Edit Board"
+  defp page_title(:show), do: "Show Status"
+  defp page_title(:edit), do: "Edit Status"
 end

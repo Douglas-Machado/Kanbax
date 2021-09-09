@@ -1,12 +1,12 @@
-defmodule KanbaxWeb.BoardLive.Index do
+defmodule KanbaxWeb.StatusLive.Index do
   use KanbaxWeb, :live_view
 
   alias Kanbax.Kanban
-  alias Kanbax.Kanban.Board
+  alias Kanbax.Kanban.Status
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :boards, list_boards())}
+    {:ok, assign(socket, :state, list_state())}
   end
 
   @impl true
@@ -16,31 +16,31 @@ defmodule KanbaxWeb.BoardLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Board")
-    |> assign(:board, Kanban.get_board!(id))
+    |> assign(:page_title, "Edit Status")
+    |> assign(:status, Kanban.get_status!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Board")
-    |> assign(:board, %Board{})
+    |> assign(:page_title, "New Status")
+    |> assign(:status, %Status{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Boards")
-    |> assign(:board, nil)
+    |> assign(:page_title, "Listing State")
+    |> assign(:status, nil)
   end
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    board = Kanban.get_board!(id)
-    {:ok, _} = Kanban.delete_board(board)
+    status = Kanban.get_status!(id)
+    {:ok, _} = Kanban.delete_status(status)
 
-    {:noreply, assign(socket, :boards, list_boards())}
+    {:noreply, assign(socket, :state, list_state())}
   end
 
-  defp list_boards do
-    Kanban.list_boards()
+  defp list_state do
+    Kanban.list_state()
   end
 end

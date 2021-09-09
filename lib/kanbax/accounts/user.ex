@@ -13,8 +13,6 @@ defmodule Kanbax.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
 
-    # has_one :tasks, Task
-
     timestamps()
   end
 

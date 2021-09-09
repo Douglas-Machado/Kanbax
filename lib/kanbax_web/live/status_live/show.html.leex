@@ -1,0 +1,22 @@
+<h1>Show Status</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, KanbaxWeb.StatusLive.FormComponent,
+    id: @status.id,
+    title: @page_title,
+    action: @live_action,
+    status: @status,
+    return_to: Routes.status_show_path(@socket, :show, @status) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @status.title %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.status_show_path(@socket, :edit, @status), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.status_index_path(@socket, :index) %></span>

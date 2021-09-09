@@ -2,14 +2,13 @@ defmodule Kanbax.Kanban.Task do
   use Ecto.Schema
   import Ecto.Changeset
 
-  # alias Kanbax.Kanban.User
-  alias Kanbax.Kanban.Column
+  alias Kanbax.Kanban.Status
 
   schema "tasks" do
     field :title, :string
     field :description, :string
 
-    belongs_to :column, Column
+    belongs_to :state, Status
 
     timestamps()
   end

@@ -1,20 +1,20 @@
-defmodule Kanbax.Kanban.Column do
+defmodule Kanbax.Kanban.Status do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Kanbax.Kanban.Board
+  alias Kanbax.Kanban.Task
 
-  schema "columns" do
+  schema "state" do
     field :title, :string
 
-    belongs_to :board, Board
+    has_many :tasks, Task
 
     timestamps()
   end
 
   @doc false
-  def changeset(attrs) do
-    %__MODULE__{}
+  def changeset(status, attrs) do
+    status
     |> cast(attrs, [:title])
     |> validate_required([:title])
   end
