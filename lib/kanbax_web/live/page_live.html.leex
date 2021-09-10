@@ -1,7 +1,7 @@
 <div class="row">
   <%= for status <- @status do %>
     <div class="col s2" style="border:1px solid black">
-    <p> <%= status.title %></p>
+    <p class="center"> <%= status.title %></p>
     <%= for task <- @tasks do %>
       <%= if task.status_id == status.id do %>
         <div class="row">
@@ -22,5 +22,4 @@
      <% end %>
     </div>
   <% end %>
-
 </div>
