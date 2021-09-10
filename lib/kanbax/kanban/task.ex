@@ -4,6 +4,8 @@ defmodule Kanbax.Kanban.Task do
 
   alias Kanbax.Kanban.Status
 
+  @require_params [:title, :description, :status_id]
+
   schema "tasks" do
     field :title, :string
     field :description, :string
@@ -16,7 +18,8 @@ defmodule Kanbax.Kanban.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:title, :description, :status_id])
-    #|> validate_required([])
+    |> cast(attrs, @require_params)
+    |> validate_required(@require_params)
+
   end
 end
