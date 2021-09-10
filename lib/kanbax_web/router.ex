@@ -73,9 +73,6 @@ defmodule KanbaxWeb.Router do
     live "/status/:id", StatusLive.Show, :show
     live "/status/:id/show/edit", StatusLive.Show, :edit
 
-
-
-
     live "/tasks", TaskLive.Index, :index
     live "/tasks/new", TaskLive.Index, :new
     live "/tasks/:id/edit", TaskLive.Index, :edit
@@ -87,7 +84,8 @@ defmodule KanbaxWeb.Router do
   scope "/", KanbaxWeb do
     pipe_through [:browser]
 
-    delete "/users/log_out", UserSessionController, :delete
+    # delete "/users/log_out", UserSessionController, :delete
+    get "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
