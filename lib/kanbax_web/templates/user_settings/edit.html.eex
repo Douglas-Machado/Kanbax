@@ -1,6 +1,6 @@
 <h1>Settings</h1>
 
-<h3>Change email</h3>
+<h3>Alterar Email</h3>
 
 <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>
   <%= if @email_changeset.action do %>
@@ -20,11 +20,11 @@
   <%= error_tag f, :current_password %>
 
   <div>
-    <%= submit "Change email" %>
+    <%= submit "Alterar email" %>
   </div>
 <% end %>
 
-<h3>Change password</h3>
+<h3>Alterar Senha</h3>
 
 <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>
   <%= if @password_changeset.action do %>
@@ -48,6 +48,6 @@
   <%= error_tag f, :current_password %>
 
   <div>
-    <%= submit "Change password" %>
+    <%= submit "Altear senha" %>
   </div>
 <% end %>
