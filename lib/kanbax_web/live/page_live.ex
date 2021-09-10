@@ -1,9 +1,10 @@
 defmodule KanbaxWeb.PageLive do
   use KanbaxWeb, :live_view
+  alias Kanbax.Kanban
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, query: "", results: %{})}
+    {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: list_tasks())}
   end
 
   @impl true
@@ -35,5 +36,13 @@ defmodule KanbaxWeb.PageLive do
         String.starts_with?(app, query) and not List.starts_with?(desc, ~c"ERTS"),
         into: %{},
         do: {app, vsn}
+  end
+
+  defp list_status do
+    Kanban.list_status()
+  end
+
+  defp list_tasks do
+    Kanban.list_tasks()
   end
 end

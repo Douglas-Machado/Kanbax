@@ -16,7 +16,7 @@ defmodule Kanbax.Kanban.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:title, :description, :status_id])
+    #|> validate_required([])
   end
 end
