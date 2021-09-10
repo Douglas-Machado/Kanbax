@@ -35,9 +35,15 @@ defmodule Kanbax.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:name, :email, :password])
+    |> validate_name()
     |> validate_email()
     |> validate_password(opts)
+  end
+
+  def validate_name(changeset) do
+    changeset
+    |> validate_length(:name, min: 2)
   end
 
   defp validate_email(changeset) do
