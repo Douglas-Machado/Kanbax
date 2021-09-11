@@ -1,9 +1,9 @@
-<ul>
+<ul style="display:flex; justify-content: space-between; display: flex;e-between; padding-top: 46px">
 <%= if @current_user do %>
 
   <li><%= @current_user.name %></li>
 <li><%= live_patch "Nova Tarefa", to: Routes.task_index_path(@conn, :new) %></li>
-  
+
   <li><%= link "Configurações", to: Routes.user_settings_path(@conn, :edit) %></li>
   <li><%= link "Sair", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
 

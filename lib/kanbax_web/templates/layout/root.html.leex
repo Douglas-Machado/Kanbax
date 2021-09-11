@@ -7,24 +7,43 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Kanbax", suffix: " · Phoenix Framework" %>
     <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
+      <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      }
+
+    nav.user-header li{
+        font-size: 20px;
+
+    }
+
+    .center{
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .header{
+      display: flex;
+      justify-content: space-between;
+      border: 0;
+    }
+    </style>
   </head>
   <body>
-    <header>
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
+    <header style="; background-color: #2196f3;">
+      <div class="center">
+        <div class="header">
+        <div style="flex: 11"><img src="/images/logo.png" style="width:248px; height:128px"></div>
+        <nav class="user-header" style="flex: 11">
           <%= render "_user_menu.html", assigns %>
         </nav>
-
+        </div>
+      </div>
     </header>
     <%= @inner_content %>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
 </html>
