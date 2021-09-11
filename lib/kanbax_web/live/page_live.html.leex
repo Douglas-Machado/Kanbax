@@ -1,29 +1,36 @@
-<div style="margin: 0 2px">
-  <div class="row" style="display flex">
-    <%= for status <- @status do %>
-      <div style="border:2px solid black; justify-content: space-between; margin-right: 10px; padding: 10px; border-radius: 8px; min-width: 200px">
-      <h2 style="text-align:center; justify-content: space-between; border-bottom: 1px solid grey"> <%= status.title %></h2>
-      <%= for task <- @tasks do %>
-        <%= if task.status_id == status.id do %>
-          <div>
-            <div class="col s12">
-              <div style="border: 1px solid blue; border-radius: 8px">
-                <div style="text-align:center; padding-left:20px; padding-right:20px">
-                  <h3> <%= task.title%> </h3>
-                  <p> <%= task.description%> </p>
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, KanbaxWeb.TaskLive.FormComponent,
+    id: @task.id || :new,
+    title: @page_title,
+    action: @live_action,
+    task: @task,
+    return_to: Routes.task_index_path(@socket, :index) %>
+<% end %>
 
+<div class ="center">
+    <div class="row">
+      <%= for status <- @status do %>
+        <div style="border-top:3px solid black; justify-content: space-between; margin-right: 10px; min-width: 220px">
+        <h3 style="text-align:center; justify-content: space-between; border-bottom: 3px solid black"> <%= status.title %></h3>
+        <%= for task <- @tasks do %>
+          <%= if task.status_id == status.id do %>
+            <div>
+                <div style="border: 3px solid blue; border-radius: 8px; margin-bottom: 10px; word-wrap: break-word;">
+                  <div style="text-align:center; padding-left:20px; padding-right:20px">
+                    <h4 style="border-bottom:1px dotted blue"> <%= task.title%> </h4>
+                    <p style="line-height: 40px"> <%= task.description%> </p>
+
+                  </div>
+                  <div class="card-action" style="text-align:right; margin-right: 6px">
+                    <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-pencil-64.png"></a>
+                    <a href="#"><img style="width: 22px; height: 22px;"src="/images/icons8-cancelar-24.png"></a>
+                    <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-excluir-16.png"></a>
+                  </div>
                 </div>
-                <div class="card-action" style="text-align:center">
-                  <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-pencil-64.png"></a>
-                  <a href="#"><img style="width: 22px; height: 22px;"src="/images/icons8-cancelar-24.png"></a>
-                  <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-excluir-16.png"></a>
-                </div>
-              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
+        </div>
       <% end %>
-      </div>
-    <% end %>
-  </div>
+    </div>
 </div>

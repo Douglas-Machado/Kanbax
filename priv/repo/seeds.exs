@@ -12,7 +12,7 @@
 
 Kanbax.Kanban.create_status(%{title: "To do"})
 Kanbax.Kanban.create_status(%{title: "Working In Progress"})
+Kanbax.Kanban.create_status(%{title: "Testing"})
 Kanbax.Kanban.create_status(%{title: "Homologation"})
-Kanbax.Kanban.create_status(%{title: "To do"})
-Kanbax.Kanban.create_status(%{title: "To do"})
-Kanbax.Kanban.create_status(%{title: "To do"})
+Kanbax.Kanban.create_status(%{title: "Ready to production"})
+Kanbax.Kanban.create_status(%{title: "Cancelled"})
