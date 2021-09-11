@@ -9,3 +9,10 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+Kanbax.Kanban.create_status(%{title: "To do"})
+Kanbax.Kanban.create_status(%{title: "Working In Progress"})
+Kanbax.Kanban.create_status(%{title: "Homologation"})
+Kanbax.Kanban.create_status(%{title: "To do"})
+Kanbax.Kanban.create_status(%{title: "To do"})
+Kanbax.Kanban.create_status(%{title: "To do"})

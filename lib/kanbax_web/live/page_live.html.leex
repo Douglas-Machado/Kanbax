@@ -1,25 +1,29 @@
-<div class="row">
-  <%= for status <- @status do %>
-    <div class="col s2" style="border:1px solid black">
-    <p class="center"> <%= status.title %></p>
-    <%= for task <- @tasks do %>
-      <%= if task.status_id == status.id do %>
-        <div class="row">
-          <div class="col s12">
-            <div class="card blue-grey darken-1">
-              <div class="card-content white-text">
-                <span class="card-title center"> <%= task.title%> </span>
+<div style="margin: 0 2px">
+  <div class="row" style="display flex">
+    <%= for status <- @status do %>
+      <div style="border:2px solid black; justify-content: space-between; margin-right: 10px; padding: 10px; border-radius: 8px; min-width: 200px">
+      <h2 style="text-align:center; justify-content: space-between; border-bottom: 1px solid grey"> <%= status.title %></h2>
+      <%= for task <- @tasks do %>
+        <%= if task.status_id == status.id do %>
+          <div>
+            <div class="col s12">
+              <div style="border: 1px solid blue; border-radius: 8px">
+                <div style="text-align:center; padding-left:20px; padding-right:20px">
+                  <h3> <%= task.title%> </h3>
+                  <p> <%= task.description%> </p>
 
-              </div>
-              <div class="card-action">
-                <a href="#">This is a link</a>
-                <a href="#">This is a link</a>
+                </div>
+                <div class="card-action" style="text-align:center">
+                  <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-pencil-64.png"></a>
+                  <a href="#"><img style="width: 22px; height: 22px;"src="/images/icons8-cancelar-24.png"></a>
+                  <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-excluir-16.png"></a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-     <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

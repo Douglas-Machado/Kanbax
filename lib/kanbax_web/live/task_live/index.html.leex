@@ -12,12 +12,15 @@
 <table>
   <thead>
     <tr>
+      <th>Task</th>
+
       <th></th>
     </tr>
   </thead>
   <tbody id="tasks">
     <%= for task <- @tasks do %>
       <tr id="task-<%= task.id %>">
+      <td><%= task.title %></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.task_show_path(@socket, :show, task) %></span>
