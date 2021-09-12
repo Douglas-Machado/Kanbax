@@ -9,6 +9,7 @@ defmodule KanbaxWeb.TaskLive.FormComponent do
 
     {:ok,
      socket
+     |> IO.inspect()
      |> assign(assigns)
      |> assign(:changeset, changeset)}
   end
