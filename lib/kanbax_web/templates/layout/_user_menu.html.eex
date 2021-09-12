@@ -9,6 +9,6 @@
 
 <% else %>
   <li><%= link "Cadastrar", to: Routes.user_registration_path(@conn, :new) %></li>
-  <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+  <li><%= link "Fazer login", to: Routes.user_session_path(@conn, :new) %></li>
 <% end %>
 </ul>

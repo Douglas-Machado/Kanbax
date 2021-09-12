@@ -20,7 +20,7 @@ defmodule KanbaxWeb.UserRegistrationController do
           )
 
         conn
-        |> put_flash(:info, "User created successfully.")
+        |> put_flash(:info, "Cadastro realizado com sucesso")
         |> UserAuth.log_in_user(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->

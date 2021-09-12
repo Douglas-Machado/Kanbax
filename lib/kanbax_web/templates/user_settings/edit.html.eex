@@ -1,11 +1,11 @@
-<h1>Settings</h1>
+<h1>Configurações</h1>
 
 <h3>Alterar Email</h3>
 
 <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>
   <%= if @email_changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Oops, algo deu errado. Verifique os campos abaixo.</p>
     </div>
   <% end %>
 
@@ -35,11 +35,11 @@
 
   <%= hidden_input f, :action, name: "action", value: "update_password" %>
 
-  <%= label f, :password, "New password" %>
+  <%= label f, :password, "Nova senha" %>
   <%= password_input f, :password, required: true %>
   <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation, "Confirm new password" %>
+  <%= label f, :password_confirmation, "Confirme nova senha" %>
   <%= password_input f, :password_confirmation, required: true %>
   <%= error_tag f, :password_confirmation %>
 
@@ -48,6 +48,6 @@
   <%= error_tag f, :current_password %>
 
   <div>
-    <%= submit "Altear senha" %>
+    <%= submit "Alterar senha" %>
   </div>
 <% end %>
