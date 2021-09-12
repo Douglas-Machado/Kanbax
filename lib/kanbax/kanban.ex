@@ -51,8 +51,15 @@ defmodule Kanbax.Kanban do
   """
   def create_task(attrs \\ %{}) do
     %Task{}
+    %Task{status_id: get_first_task_id()}
+    |> IO.inspect()
     |> Task.changeset(attrs)
+    # |> IO.inspect()
     |> Repo.insert()
+  end
+
+  def get_first_task_id do
+    Enum.at(list_status(),0).id
   end
 
   @doc """
