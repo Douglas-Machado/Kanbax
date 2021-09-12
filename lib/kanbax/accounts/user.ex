@@ -49,7 +49,7 @@ defmodule Kanbax.Accounts.User do
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])
-    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
+    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "E-mail deve possuir @ e não conter espaços")
     |> validate_length(:email, max: 160)
     |> unsafe_validate_unique(:email, Kanbax.Repo)
     |> unique_constraint(:email)
@@ -58,7 +58,7 @@ defmodule Kanbax.Accounts.User do
   defp validate_password(changeset, opts) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 4, max: 80)
+    |> validate_length(:password, min: 4, max: 10)
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
@@ -89,7 +89,7 @@ defmodule Kanbax.Accounts.User do
     |> validate_email()
     |> case do
       %{changes: %{email: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :email, "did not change")
+      %{} = changeset -> add_error(changeset, :email, "Senha não pode ser a mesma")
     end
   end
 
@@ -108,7 +108,7 @@ defmodule Kanbax.Accounts.User do
   def password_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:password])
-    |> validate_confirmation(:password, message: "does not match password")
+    |> validate_confirmation(:password, message: "As senhas não batem")
     |> validate_password(opts)
   end
 

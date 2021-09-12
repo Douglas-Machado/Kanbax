@@ -1,4 +1,4 @@
-<h1>Show Task</h1>
+<h1>Tarefas</h1>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, KanbaxWeb.TaskLive.FormComponent,
@@ -13,5 +13,5 @@
 
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.task_show_path(@socket, :edit, @task), class: "button" %></span>
-<span><%= live_redirect "Back", to: Routes.task_index_path(@socket, :index) %></span>
+<span><%= live_patch "Editar", to: Routes.task_show_path(@socket, :edit, @task), class: "button" %></span>
+<span><%= live_redirect "Voltar", to: Routes.task_index_path(@socket, :index) %></span>

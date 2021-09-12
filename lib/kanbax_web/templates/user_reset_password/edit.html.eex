@@ -1,4 +1,4 @@
-<h1>Reset password</h1>
+<h1>Alterar Senha</h1>
 
 <%= form_for @changeset, Routes.user_reset_password_path(@conn, :update, @token), fn f -> %>
   <%= if @changeset.action do %>
@@ -7,16 +7,16 @@
     </div>
   <% end %>
 
-  <%= label f, :password, "New password" %>
+  <%= label f, :password, "Nova senha" %>
   <%= password_input f, :password, required: true %>
   <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation, "Confirm new password" %>
+  <%= label f, :password_confirmation, "Confirmar nova senha" %>
   <%= password_input f, :password_confirmation, required: true %>
   <%= error_tag f, :password_confirmation %>
 
   <div>
-    <%= submit "Reset password" %>
+    <%= submit "Senha alterada" %>
   </div>
 <% end %>
 

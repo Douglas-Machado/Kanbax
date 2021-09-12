@@ -32,7 +32,7 @@ defmodule KanbaxWeb.TaskLive.FormComponent do
       {:ok, _task} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Task updated successfully")
+         |> put_flash(:info, "Alteração salva com sucesso")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -45,7 +45,7 @@ defmodule KanbaxWeb.TaskLive.FormComponent do
       {:ok, _task} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Task created successfully")
+         |> put_flash(:info, "Tarefa criada com sucesso")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

@@ -7,6 +7,7 @@
     return_to: Routes.task_index_path(@socket, :index) %>
 <% end %>
 
+
 <div class ="center">
     <div class="row">
       <%= for status <- @status do %>
@@ -23,8 +24,10 @@
                   </div>
                   <div class="card-action" style="text-align:right; margin-right: 6px">
                     <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-pencil-64.png"></a>
-                    <a href="#"><img style="width: 22px; height: 22px;"src="/images/icons8-cancelar-24.png"></a>
-                    <a href="#"><img style="width: 24px; height: 24px;"src="/images/icons8-excluir-16.png"></a>
+
+                    <a href="#" style="font-size:1px"><img style="width: 22px; height: 22px;"src="/images/icons8-cancelar-24.png" <%= link "c", to: Routes.task_index_path(@socket, :edit, task) %> </a>
+
+                    <a href="#" style="font-size:1px"><img style="width: 24px; height: 24px;"src="/images/icons8-excluir-16.png"<%= link "x", to: "#", phx_click: "delete", phx_value_id: task.id, data: [confirm: "Tem certeza?"] %>  </a>
                   </div>
                 </div>
             </div>
