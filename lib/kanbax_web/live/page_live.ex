@@ -31,6 +31,14 @@ defmodule KanbaxWeb.PageLive do
   end
 
   @impl true
+  def handle_event("change", %{"id" => id}, socket) do
+    task = Kanban.get_task!(id)
+    {:ok, _} = Kanban.update_task(task, %{status_id: (task.status_id + 1)})
+
+    {:noreply, assign(socket, :tasks, list_tasks())}
+  end
+
+  @impl true
   def handle_event("suggest", %{"q" => query}, socket) do
     {:noreply, assign(socket, results: search(query), query: query)}
   end
