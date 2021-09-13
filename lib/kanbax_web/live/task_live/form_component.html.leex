@@ -14,6 +14,10 @@
     <%= textarea f, :description %>
     <%= error_tag f, :description %>
 
+    <%= label f, :executor_id %>
+    <%= select f, :executor_id, Enum.map(@users, fn user -> {user.name, user.id} end) %>
+    <%= error_tag f, :executor_id %>
+
     <%= submit "Salvar", phx_disable_with: "Saving..." %>
 
 </form>

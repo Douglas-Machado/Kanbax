@@ -4,6 +4,7 @@
     title: @page_title,
     action: @live_action,
     task: @task,
+    users: @users,
     return_to: Routes.page_path(@socket, :index) %>
 <% end %>
 
@@ -31,7 +32,7 @@
                       <div style="border-top: 1px solid blue; text-align: center">
                         <span> <%= @current_user.name %></span>
                         <span>/</span>
-                        <span> <%= @current_user.name %></span>
+                        <span> <%= task.executor.name %></span>
                       </div>
 
                     <div class="card-action" style="text-align:center; margin-right: 6px">

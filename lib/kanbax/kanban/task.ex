@@ -5,7 +5,7 @@ defmodule Kanbax.Kanban.Task do
   alias Kanbax.Kanban.Status
   alias Kanbax.Accounts.User
 
-  @require_params [:title, :description, :status_id, :reporter_id]
+  @require_params [:title, :description, :status_id, :reporter_id, :executor_id]
 
   schema "tasks" do
     field :title, :string

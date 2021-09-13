@@ -2,15 +2,15 @@ defmodule KanbaxWeb.PageLive do
   use KanbaxWeb, :live_view
   alias Kanbax.Kanban
 
-  alias Kanbax.Accounts
-  alias Kanbax.Accounts.UserToken
   alias Kanbax.Repo
+  alias Kanbax.Accounts
 
   alias Kanbax.Kanban.Task
 
   @impl true
   def mount(_params, session, socket) do
-    {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: list_tasks()) |> assign(:current_user, get_current_user(session))}
+    tasks = Kanban.list_tasks() |> Repo.preload(:executor)
+    {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: tasks) |> assign(:current_user, get_current_user(session))}
   end
 
   @impl true
@@ -61,12 +61,14 @@ defmodule KanbaxWeb.PageLive do
     socket
     |> assign(:page_title, "Nova Tarefa")
     |> assign(:task, %Task{})
+    |> assign(:users, Accounts.list_users())
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Editar Tarefa")
     |> assign(:task, Kanban.get_task!(id))
+    |> assign(:users, Accounts.list_users())
   end
 
   defp apply_action(socket, :index, _params) do
@@ -99,10 +101,5 @@ defmodule KanbaxWeb.PageLive do
 
   defp get_current_user(session) do
     Accounts.get_user_by_session_token(session["user_token"])
-  end
-
-  def get_user_by_session_token(token) do
-    {:ok, query} = UserToken.verify_session_token_query(token)
-    Repo.one(query)
   end
 end
