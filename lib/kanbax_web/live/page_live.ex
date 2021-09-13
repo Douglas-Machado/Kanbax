@@ -2,16 +2,19 @@ defmodule KanbaxWeb.PageLive do
   use KanbaxWeb, :live_view
   alias Kanbax.Kanban
 
+  alias Kanbax.Repo
+  alias Kanbax.Accounts
+
   alias Kanbax.Kanban.Task
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: list_tasks())}
+  def mount(_params, session, socket) do
+    tasks = Kanban.list_tasks() |> Repo.preload(:executor)
+    {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: tasks) |> assign(:current_user, get_current_user(session))}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
-    IO.inspect(socket)
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
@@ -19,6 +22,32 @@ defmodule KanbaxWeb.PageLive do
   def handle_event("delete", %{"id" => id}, socket) do
     task = Kanban.get_task!(id)
     {:ok, _} = Kanban.delete_task(task)
+
+    {:noreply, assign(socket, :tasks, list_tasks())}
+  end
+
+  @impl true
+  def handle_event("cancel", %{"id" => id}, socket) do
+    task = Kanban.get_task!(id)
+    {:ok, _} = Kanban.update_task(task, %{status_id: 6})
+
+    {:noreply, assign(socket, :tasks, list_tasks())}
+  end
+
+  @impl true
+  def handle_event("change_up", %{"id" => id}, socket) do
+    task = Kanban.get_task!(id)
+    {:ok, _} = Kanban.update_task(task, %{status_id: (task.status_id + 1)})
+
+    {:noreply, assign(socket, :tasks, list_tasks())}
+  end
+
+
+
+  @impl true
+  def handle_event("change_down", %{"id" => id}, socket) do
+    task = Kanban.get_task!(id)
+    {:ok, _} = Kanban.update_task(task, %{status_id: (task.status_id - 1)})
 
     {:noreply, assign(socket, :tasks, list_tasks())}
   end
@@ -32,12 +61,14 @@ defmodule KanbaxWeb.PageLive do
     socket
     |> assign(:page_title, "Nova Tarefa")
     |> assign(:task, %Task{})
+    |> assign(:users, Accounts.list_users())
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Editar Tarefa")
     |> assign(:task, Kanban.get_task!(id))
+    |> assign(:users, Accounts.list_users())
   end
 
   defp apply_action(socket, :index, _params) do
@@ -66,5 +97,9 @@ defmodule KanbaxWeb.PageLive do
 
   defp list_tasks do
     Kanban.list_tasks()
+  end
+
+  defp get_current_user(session) do
+    Accounts.get_user_by_session_token(session["user_token"])
   end
 end

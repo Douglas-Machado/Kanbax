@@ -41,6 +41,7 @@ defmodule KanbaxWeb.TaskLive.FormComponent do
   end
 
   defp save_task(socket, :new, task_params) do
+    IO.inspect(task_params)
     case Kanban.create_task(task_params) do
       {:ok, _task} ->
         {:noreply,
