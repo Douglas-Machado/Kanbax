@@ -11,7 +11,6 @@ defmodule KanbaxWeb.PageLive do
 
   @impl true
   def handle_params(params, _url, socket) do
-    IO.inspect(socket)
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
@@ -19,6 +18,14 @@ defmodule KanbaxWeb.PageLive do
   def handle_event("delete", %{"id" => id}, socket) do
     task = Kanban.get_task!(id)
     {:ok, _} = Kanban.delete_task(task)
+
+    {:noreply, assign(socket, :tasks, list_tasks())}
+  end
+
+  @impl true
+  def handle_event("cancel", %{"id" => id}, socket) do
+    task = Kanban.get_task!(id)
+    {:ok, _} = Kanban.update_task(task, %{status_id: 6})
 
     {:noreply, assign(socket, :tasks, list_tasks())}
   end
