@@ -1,4 +1,4 @@
-<ul style="display:flex; justify-content: space-between; display: flex;e-between; padding-top: 46px">
+<ul style="display:flex; justify-content: space-between; display: flex; padding-top: 46px">
 <%= if @current_user do %>
 
   <li><%= @current_user.name %></li>

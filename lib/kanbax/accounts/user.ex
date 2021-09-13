@@ -2,7 +2,7 @@ defmodule Kanbax.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  # alias Kanbax.Kanban.Task
+  alias Kanbax.Kanban.Task
 
   @derive {Inspect, except: [:password]}
 
@@ -12,6 +12,9 @@ defmodule Kanbax.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+
+    has_many :reporter_tasks, Task, foreign_key: :reporter_id
+    has_many :executor_tasks, Task, foreign_key: :executor_id
 
     timestamps()
   end
