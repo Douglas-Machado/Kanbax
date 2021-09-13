@@ -73,6 +73,8 @@ defmodule KanbaxWeb.Router do
     live "/status/:id", StatusLive.Show, :show
     live "/status/:id/show/edit", StatusLive.Show, :edit
 
+    live "/new", PageLive, :new
+
     live "/tasks", TaskLive.Index, :index
     live "/tasks/new", TaskLive.Index, :new
     live "/tasks/:id/edit", TaskLive.Index, :edit
