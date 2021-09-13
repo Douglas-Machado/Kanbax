@@ -17,7 +17,7 @@
         <%= for task <- @tasks do %>
           <%= if task.status_id == status.id do %>
             <div>
-                <div style="border: 3px solid blue; border-radius: 8px; margin-bottom: 10px; word-wrap: break-word;">
+                <div style="border: 3px solid #e012e0; border-radius: 8px; margin-bottom: 10px; word-wrap: break-word;">
                   <div style="text-align:center; padding-left:20px; padding-right:20px">
 
                     <a href="#" style="font-size: 0.1px"><img style="width: 16px; height: 12px" src="/images/icons8-seta-longa-à-esquerda-24.png" <%= link "change_down", to: "#", phx_click: "change_down", phx_value_id: task.id %> </a>
