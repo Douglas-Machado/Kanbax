@@ -2,26 +2,17 @@ defmodule KanbaxWeb.PageLive do
   use KanbaxWeb, :live_view
   alias Kanbax.Kanban
 
+  alias Kanbax.Kanban.Task
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: list_tasks())}
   end
 
   @impl true
-  def handle_event(params, _url, socket) do
+  def handle_params(params, _url, socket) do
+    IO.inspect(socket)
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Editar Tarefa")
-    |> assign(:task, Kanban.get_task!(id))
-  end
-
-  defp apply_action(socket, :index, _params) do
-    socket
-    |> assign(:page_title, "Listing Tasks")
-    |> assign(:task, nil)
   end
 
   @impl true
@@ -37,19 +28,25 @@ defmodule KanbaxWeb.PageLive do
     {:noreply, assign(socket, results: search(query), query: query)}
   end
 
-  @impl true
-  def handle_event("search", %{"q" => query}, socket) do
-    case search(query) do
-      %{^query => vsn} ->
-        {:noreply, redirect(socket, external: "https://hexdocs.pm/#{query}/#{vsn}")}
-
-      _ ->
-        {:noreply,
-         socket
-         |> put_flash(:error, "No dependencies found matching \"#{query}\"")
-         |> assign(results: %{}, query: query)}
-    end
+  defp apply_action(socket, :new, _params) do
+    socket
+    |> assign(:page_title, "Nova Tarefa")
+    |> assign(:task, %Task{})
   end
+
+  defp apply_action(socket, :edit, %{"id" => id}) do
+    socket
+    |> assign(:page_title, "Editar Tarefa")
+    |> assign(:task, Kanban.get_task!(id))
+  end
+
+  defp apply_action(socket, :index, _params) do
+    socket
+    |> assign(:page_title, "Listing Tasks")
+    |> assign(:task, nil)
+  end
+
+
 
   defp search(query) do
     if not KanbaxWeb.Endpoint.config(:code_reloader) do
