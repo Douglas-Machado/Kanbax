@@ -14,7 +14,7 @@ defmodule KanbaxWeb.UserSessionController do
     if user = Accounts.get_user_by_email_and_password(email, password) do
       UserAuth.log_in_user(conn, user, user_params)
     else
-      render(conn, "new.html", error_message: "Invalid email or password")
+      render(conn, "new.html", error_message: "E-mail e/ou senha inválidos")
     end
   end
 

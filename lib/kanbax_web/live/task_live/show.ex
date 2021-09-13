@@ -16,6 +16,6 @@ defmodule KanbaxWeb.TaskLive.Show do
      |> assign(:task, Kanban.get_task!(id))}
   end
 
-  defp page_title(:show), do: "Show Task"
-  defp page_title(:edit), do: "Edit Task"
+  defp page_title(:show), do: "Mostrar Tarefa"
+  defp page_title(:edit), do: "Editar Tarefa"
 end

@@ -16,13 +16,13 @@ defmodule KanbaxWeb.TaskLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Task")
+    |> assign(:page_title, "Editar Tarefa")
     |> assign(:task, Kanban.get_task!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Task")
+    |> assign(:page_title, "Nova Tarefa")
     |> assign(:task, %Task{})
   end
 

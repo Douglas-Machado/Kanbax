@@ -19,7 +19,7 @@ defmodule Kanbax.Kanban.Task do
   def changeset(task, attrs) do
     task
     |> cast(attrs, @require_params)
-    |> validate_required(@require_params)
+    |> validate_required([:title, :description])
 
   end
 end

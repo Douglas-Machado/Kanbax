@@ -1,4 +1,4 @@
-<h1>Listing Tasks</h1>
+<h1>Tarefas</h1>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, KanbaxWeb.TaskLive.FormComponent,
@@ -12,21 +12,25 @@
 <table>
   <thead>
     <tr>
+      <th>Tarefas</th>
+
       <th></th>
     </tr>
   </thead>
   <tbody id="tasks">
     <%= for task <- @tasks do %>
       <tr id="task-<%= task.id %>">
+      <td><%= task.title %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.task_show_path(@socket, :show, task) %></span>
-          <span><%= live_patch "Edit", to: Routes.task_index_path(@socket, :edit, task) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: task.id, data: [confirm: "Are you sure?"] %></span>
+          <span><%= live_redirect "Visualizar", to: Routes.task_show_path(@socket, :show, task) %></span>
+          <span><%= live_patch "Editar", to: Routes.task_index_path(@socket, :edit, task) %></span>
+          <span><%= link "Excluir", to: "#", phx_click: "delete", phx_value_id: task.id, data: [confirm: "Tem certeza?"] %></span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Task", to: Routes.task_index_path(@socket, :new) %></span>
+<span><%= live_patch "Adicionar Tarefa", to: Routes.task_index_path(@socket, :new) %></span>
+<li><%= live_patch "Retornar ao Kanban", to: Routes.user_session_path(@socket, :new) %></li>
