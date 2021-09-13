@@ -60,9 +60,6 @@ defmodule Kanbax.Kanban do
     Enum.at(list_status(),0).id
   end
 
-  def get_first_task_status_id do
-    Enum.at(list_tasks(),0).status_id
-  end
 
   @doc """
   Updates a task.
