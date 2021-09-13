@@ -9,8 +9,9 @@ defmodule KanbaxWeb.PageLive do
 
   @impl true
   def mount(_params, session, socket) do
+    IO.inspect(Accounts.get_user_by_session_token(session["user_token"]))
     tasks = Kanban.list_tasks() |> Repo.preload(:executor)
-    {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: tasks) |> assign(:current_user, get_current_user(session))}
+    {:ok, assign(socket, query: "", results: %{}, status: list_status(), tasks: tasks) |> assign(:current_user, Accounts.get_user_by_session_token(session["user_token"]))}
   end
 
   @impl true
@@ -97,9 +98,5 @@ defmodule KanbaxWeb.PageLive do
 
   defp list_tasks do
     Kanban.list_tasks()
-  end
-
-  defp get_current_user(session) do
-    Accounts.get_user_by_session_token(session["user_token"])
   end
 end
