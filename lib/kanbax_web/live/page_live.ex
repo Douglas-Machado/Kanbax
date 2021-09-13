@@ -31,9 +31,19 @@ defmodule KanbaxWeb.PageLive do
   end
 
   @impl true
-  def handle_event("change", %{"id" => id}, socket) do
+  def handle_event("change_up", %{"id" => id}, socket) do
     task = Kanban.get_task!(id)
     {:ok, _} = Kanban.update_task(task, %{status_id: (task.status_id + 1)})
+
+    {:noreply, assign(socket, :tasks, list_tasks())}
+  end
+
+
+
+  @impl true
+  def handle_event("change_down", %{"id" => id}, socket) do
+    task = Kanban.get_task!(id)
+    {:ok, _} = Kanban.update_task(task, %{status_id: (task.status_id - 1)})
 
     {:noreply, assign(socket, :tasks, list_tasks())}
   end
